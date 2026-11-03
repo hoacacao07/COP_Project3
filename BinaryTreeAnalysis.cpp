@@ -116,6 +116,7 @@ namespace {
             return false;
         }
 
+        // Difference of heights cannot exceed 1
         if (std::abs(leftHeight - rightHeight) > 1) { 
             return false; 
         }
