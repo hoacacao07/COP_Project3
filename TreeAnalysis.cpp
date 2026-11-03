@@ -111,3 +111,17 @@ int countExternal(const LinkedTree& tree)
     return static_cast<int>(getExternalNodes(tree).size());
 }
 
+/* Prints items 1 to 6 where each node list is numbered and shows the node's preorder position and text.
+ */
+void printAnalysis(const LinkedTree& tree, std::ostream& out) 
+{
+    out << "\n--- Tree Properties ---\n";
+    out << "1. Root Node: " << tree.getRoot() << "\n";
+    out << "2. Number of Internal Nodes: " << countInternal(tree) << "\n";
+    out << "3. Number of External (leaf) Nodes: " << countExternal(tree) << "\n";
+    out << "4. Tree Height: " << getHeight(tree) << "\n";
+    out << "5. Internal Nodes (preorder): " << "\n";
+    getInternalNodes(tree);
+    out << "6. External Nodes (preorder): " << "\n";
+    getExternalNodes(tree);
+}

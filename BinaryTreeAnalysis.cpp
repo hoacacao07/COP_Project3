@@ -5,10 +5,10 @@
 
 namespace {
 
-    /* *1. isBinaryHelper checks if a node and its children satisfy the binary tree property (each node has at most two children).
-       * Node is the root of the subtree to check, may be nullptr (returns true)
-       * Logic: If the node is nullptr, return true (base case). If the node has more than two children, return false. 
-       * Otherwise, recursively check each child.
+    /* 1. isBinaryHelper checks if a node and its children satisfy the binary tree property (each node has at most two children).
+       - Node is the root of the subtree to check, may be nullptr (returns true)
+       - Logic: If the node is nullptr, return true (base case). If the node has more than two children, return false. 
+       - Otherwise, recursively check each child.
     */
     bool isBinaryHelper(const TreeNode* node) {
         if (node == nullptr) {
@@ -19,7 +19,6 @@ namespace {
             return false;
         }
 
-        // Recursively check each child
         for (const TreeNode* child : node->children) { 
             if (!isBinaryHelper(child)) { // If any child subtree is not binary, the whole tree is not binary
                 return false;
@@ -29,9 +28,8 @@ namespace {
         return true;
     }
 
-    /* *2. isProperHelper checks if it has the proper binary tree property
-        * where each node has either zero or two children.
-        * Logic: If the node has 1 child, return false. Otherwise, recursively check each child.
+    /*  2. isProperHelper checks if it has the proper binary tree property where each node has either zero or two children.
+        - Logic: If the node has 1 child, return false. Otherwise, recursively check each child.
     */
     bool isProperHelper(const TreeNode* node) {
         if (node == nullptr) { 
@@ -60,7 +58,7 @@ namespace {
             return true;
         }
 
-        if (node->isExternal()) { // If the node is a leaf
+        if (node->isExternal()) { // If the node is a leaf, check its depth
             if (leafDepth == -1) { // If this is the first leaf encountered
                 leafDepth = depth; // Set the leaf depth
             } else if (leafDepth != depth) { // If this leaf's depth doesn't match the first leaf's depth
@@ -156,11 +154,10 @@ namespace {
     void printBinaryTreeAnalysis(const LinkedTree& tree, std::ostream& out) { 
         bool isBin = isBinary(tree); // Tracks whether the tree is binary
 
-        out << "Binary Tree Analysis: " << "\n"; 
+        out << "\n--- Binary Tree Analysis ---\n"; 
         
         out << "Is it a Binary Tree? " << (isBin ? "Yes" : "No") << "\n";
 
-        // First check if the tree is binary before checking for proper, perfect, and balanced properties, as these properties are only relevant for binary trees.
         if(isBin) {
             out << "Proper Tree: " << (isProper(tree) ? "Yes" : "No") << "\n";
             out << "Perfect Tree: " << (isPerfect(tree) ? "Yes" : "No") << "\n";

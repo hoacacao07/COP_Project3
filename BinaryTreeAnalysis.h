@@ -1,9 +1,16 @@
-// Read-only operations for analyzing binary-tree properties.
 #ifndef BINARY_TREE_ANALYSIS_H
 #define BINARY_TREE_ANALYSIS_H
 
 #include "LinkedTree.h"
 #include <ostream>
+
+/* BinaryTreeAnalysis is a set of read-only functions that analyze the properties of a LinkedTree as a binary tree.
+   1. Is it a Binary Tree? = isBinary()
+   2. Is it a Proper Binary Tree? = isProper()
+   3. Is it a Perfect Binary Tree? = isPerfect()
+   4. Is it Balanced? = isBalanced()
+   printBinaryTreeAnalysis() prints all four in that order.
+*/
 
 // Returns true if the tree is a binary tree (each node has at most two children).
 bool isBinary(const LinkedTree& tree);
