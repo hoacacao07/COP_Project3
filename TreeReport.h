@@ -5,10 +5,14 @@
 #include "TreeAnalysis.h"
 #include "BinaryTreeAnalysis.h"
 
-#include <ostream>
 #include <string>
 
-// Writes a report of the tree's properties to the specified file.
+/*  TreeReport.h contains the read-only interface for writing tree reports to a file.
+    Will create a report about the tree that will contain:
+    1. Tree Visualization = createTreeVisualization()
+    2. Tree Analysis = printAnalysis()
+    3. Binary Tree Analysis = printBinaryTreeAnalysis() 
+*/
 void writeTreeReport(const LinkedTree& tree, const std::string& filename);
 
 

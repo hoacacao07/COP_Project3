@@ -1,37 +1,52 @@
 #include "TreeReport.h"
 #include <fstream>
-/*Open/create about_tree.txt from your code.
-[ ] Print the root node.
-[ ] Print internal and external node counts.
-[ ] Print tree height.
-[ ] Print preorder internal and external nodes.
-[ ] Generate the tree visualization with two dashes per level and edge labels in brackets.
-[ ] Print the binary-tree analysis.*/
+#include <stdexcept>
+/* TreeReport.cpp contains the implementation for writing tree reports */
 
-void writeTreeReport(const LinkedTree& tree, const std::string& filename) {
-    std::ofstream outFile(filename);
-    if (!outFile.is_open()) {
-        throw std::runtime_error("Unable to open file: " + filename);
-    }
-
-    if (!outFile) {
-        throw std::runtime_error("Unable to open file: " + filename);
-    }
-
-    // print Tree analysis report by calling the printTreeAnalysis function
-    printAnalysis(tree, outFile);
-
-    // Generate the tree visualization with two dashes per level and edge labels in brackets.
-    std::function<void(TreeNode*, int)> printTreeVisualization = [&](TreeNode* node, int level) {
-        if (!node) return;
-        outFile << std::string(level * 2, '-') << "[" << node->edgeLabel << "] " << node->content << "\n";
-        for (TreeNode* child : node->children) {
-            printTreeVisualization(child, level + 1);
+namespace {
+    /* createTreeVisualization()
+    - Use dash-based indentation 
+    - Level n → 2 × n dashes (no dashes for the root, 2 dashes for level 1, 4 dashes for level 2, etc.)
+    - Include edge labels in [ ]
+    */
+    void createTreeVisualization (const TreeNode* node, std::ostream& out) {
+        if (node == nullptr) {
+            return;
         }
-    };
 
-    printTreeVisualization(tree.getRoot(), 0);  
+        if(node->level > 0) { // Not the root, so print edge label and content
+            // 
+            for(int i =0; i < node->level * 2; i++) {
+                out << "-";
+            }
+
+            out << "[" << node->edgeLabel << "] " << node->content << "\n";
+        } else {
+            out << node->content << "\n";
+        }
+
+        for (const TreeNode* child : node->children) {
+            createTreeVisualization(child, out);
+        }
         
-    printBinaryTreeAnalysis(tree, outFile);
+    }
+}
 
+/* writeTreeReport() will create a report (about_tree.txt) about the tree that will contain:
+1. Tree Visualization = createTreeVisualization()
+2. Tree Analysis = printAnalysis()
+3. Binary Tree Analysis = printBinaryTreeAnalysis()
+*/
+void writeTreeReport(const LinkedTree& tree, const std::string& filename) {
+
+    std::ofstream outFile(filename);
+    if (!outFile) {
+        throw std::runtime_error("Error: Failed to open file: " + filename);
+    }
+
+    outFile << "--- Tree Visualization ---\n";
+    createTreeVisualization(tree.getRoot(), outFile);
+
+    printAnalysis(tree, outFile);
+    printBinaryTreeAnalysis(tree, outFile);
 }
