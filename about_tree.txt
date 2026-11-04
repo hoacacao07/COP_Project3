@@ -1,0 +1,32 @@
+--- Tree Visualization ---
+Do you currently own a car?
+--[Yes] Is the car in good working condition?
+----[Yes] Is the monthly payment for the new car, plus the monthly payment of your current car, within your monthly budget?
+------[Yes] Purchase a car
+------[No] Dont purchase a car
+----[Sometimes] Does the car typically require expensive repairs?
+------[Yes] Purchase a car
+------[No] Dont purchase a car
+----[No] Purchase a car
+--[No] Purchase a car
+
+--- Tree Properties ---
+1. Root Node: [1] Do you currently own a car?
+2. Number of Internal Nodes: 4
+3. Number of External (leaf) Nodes: 6
+4. Tree Height: 3
+5. Internal Nodes (preorder):
+   1) [1] Do you currently own a car?
+   2) [2] Is the car in good working condition?
+   3) [3] Is the monthly payment for the new car, plus the monthly payment of your current car, within your monthly budget?
+   4) [6] Does the car typically require expensive repairs?
+6. External Nodes (preorder):
+   1) [4] Purchase a car
+   2) [5] Dont purchase a car
+   3) [7] Purchase a car
+   4) [8] Dont purchase a car
+   5) [9] Purchase a car
+   6) [10] Purchase a car
+
+--- Binary Tree Analysis ---
+Is it a Binary Tree? No
