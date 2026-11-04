@@ -4,13 +4,8 @@
  
 namespace {
  
-/*
- visitPreorder
- Recursive preorder: record the node first, then visit each child from left to
- right (the order the parser added them).
- node is the root of the subtree to walk, may be nullptr
- out is the list that receives the nodes in the order they are visited
- */
+/* visitPreorder Recursive preorder: record the node first, then visit each child from left to right (the order the parser added them).
+ node is the root of the subtree to walk, may be nullptr out is the list that receives the nodes in the order they are visited */
 void visitPreorder(TreeNode* node, std::vector<TreeNode*>& out)
 {
     if (node == nullptr)
@@ -25,11 +20,8 @@ void visitPreorder(TreeNode* node, std::vector<TreeNode*>& out)
     }
 }
  
-/*
- heightOf returns the recursive height of a subtree, counted in edges.
- A leaf has height 0. Any other node has 1 + the tallest child height.
- node is the root of the subtree, may be nullptr (returns -1)
- */
+/* heightOf returns the recursive height of a subtree, counted in edges. A leaf has height 0. Any other node has 1 + the tallest child height.
+ node is the root of the subtree, may be nullptr (returns -1) */
 int heightOf(const TreeNode* node)
 {
     if (node == nullptr)
@@ -45,12 +37,8 @@ int heightOf(const TreeNode* node)
     return tallestChild + 1;
 }
  
-/*
- printNodeList prints a numbered list of nodes, one per line.
- Each line shows the list number, the node's preorder position, and its text.
- nodes is the list to print (already in preorder)
- out is the stream that receives the text
- */
+/* printNodeList prints a numbered list of nodes, one per line. Each line shows the list number, the node's preorder position, and its text.
+ nodes is the list to print (already in preorder) out is the stream that receives the text */
 void printNodeList(const std::vector<TreeNode*>& nodes, std::ostream& out)
 {
     int number = 1;
@@ -64,9 +52,7 @@ void printNodeList(const std::vector<TreeNode*>& nodes, std::ostream& out)
  
 } // namespace
  
-/*
- preorder collects the whole tree in preorder starting from the root.
- */
+/* preorder collects the whole tree in preorder starting from the root. */
 std::vector<TreeNode*> preorder(const LinkedTree& tree)
 {
     std::vector<TreeNode*> nodes;
@@ -75,17 +61,13 @@ std::vector<TreeNode*> preorder(const LinkedTree& tree)
     return nodes;
 }
  
-/*
- getRootNode returns the root of the tree, or nullptr if the tree is empty.
- */
+/* getRootNode returns the root of the tree, or nullptr if the tree is empty. */
 TreeNode* getRootNode(const LinkedTree& tree)
 {
     return tree.getRoot();
 }
  
-/*
- getInternalNodes filters the preorder list, keeping only nodes that have children.
- */
+/* getInternalNodes filters the preorder list, keeping only nodes that have children. */
 std::vector<TreeNode*> getInternalNodes(const LinkedTree& tree)
 {
     std::vector<TreeNode*> internal;
@@ -99,9 +81,7 @@ std::vector<TreeNode*> getInternalNodes(const LinkedTree& tree)
     return internal;
 }
  
-/*
- getExternalNodes filters the preorder list, keeping only leaves (nodes with no children).
- */
+/* getExternalNodes filters the preorder list, keeping only leaves (nodes with no children). */
 std::vector<TreeNode*> getExternalNodes(const LinkedTree& tree)
 {
     std::vector<TreeNode*> external;
@@ -115,36 +95,25 @@ std::vector<TreeNode*> getExternalNodes(const LinkedTree& tree)
     return external;
 }
  
-/*
- getHeight returns the height of the whole tree in edges, or -1 if the tree is empty.
- */
+/* getHeight returns the height of the whole tree in edges, or -1 if the tree is empty. */
 int getHeight(const LinkedTree& tree)
 {
     return heightOf(tree.getRoot());
 }
  
-/*
- countInternal counts the number of nodes that have at least one child.
- */
+/* countInternal counts the number of nodes that have at least one child. */
 int countInternal(const LinkedTree& tree)
 {
     return static_cast<int>(getInternalNodes(tree).size());
 }
  
-/*
- countExternal counts the number of leaves.
- */
+/* countExternal counts the number of leaves. */
 int countExternal(const LinkedTree& tree)
 {
     return static_cast<int>(getExternalNodes(tree).size());
 }
  
-/*
- printAnalysis prints items 1 to 6. Each node list is numbered and shows the
- node's preorder position and text.
- tree is the tree to analyze
- out is the stream that receives the text (console or report file)
- */
+/* printAnalysis prints items 1 to 6. Each node list is numbered and shows the node's preorder position and text. */
 void printAnalysis(const LinkedTree& tree, std::ostream& out)
 {
     const TreeNode* root = getRootNode(tree);

@@ -11,11 +11,8 @@
  
 namespace {
  
-/*
- findFirstSibling returns the first node that shares a parent with the given
- node, or nullptr if the node is the root or an only child.
- node is the node whose sibling is wanted
- */
+/* findFirstSibling returns the first node that shares a parent with the given node, or nullptr if the node is the root or an only child.
+ node is the node whose sibling is wanted */
 const TreeNode* findFirstSibling(const TreeNode* node)
 {
     if (node->parent == nullptr)
@@ -33,11 +30,8 @@ const TreeNode* findFirstSibling(const TreeNode* node)
     return nullptr;
 }
  
-/*
- displayNodeInformation prints the selected node's content, one ancestor
- (its parent), one descendant (its first child), and one sibling.
- node is the node chosen by the user, must not be nullptr
- */
+/* displayNodeInformation prints the selected node's content, one ancestor (its parent), one descendant (its first child), and one sibling.
+ node is the node chosen by the user, must not be nullptr */
 void displayNodeInformation(const TreeNode* node)
 {
     const TreeNode* sibling = findFirstSibling(node);
@@ -54,12 +48,7 @@ void displayNodeInformation(const TreeNode* node)
               << (sibling != nullptr ? sibling->content : "None") << "\n";
 }
  
-/*
- chooseFilename decides which tree file to load.
- If a filename was given on the command line it is used. Otherwise the user
- picks one of the two sample files or types any other filename.
- Returns false if the user's choice could not be read or is invalid.
- */
+/* chooseFilename decides which tree file to load. lets user pick which tre they want and if the choice is wrong it returns false. */
 bool chooseFilename(int argc, char* argv[], std::string& filename)
 {
     if (argc > 1)
@@ -103,7 +92,8 @@ bool chooseFilename(int argc, char* argv[], std::string& filename)
     return true;
 }
  
-} // namespace
+}
+
  
 int main(int argc, char* argv[])
 {
@@ -118,7 +108,7 @@ int main(int argc, char* argv[])
         return 1;
     }
  
-    // Build the tree from the selected file.
+    // Build tree from file thats selected 
     LinkedTree tree;
     std::string errorMessage;
  
@@ -131,7 +121,7 @@ int main(int argc, char* argv[])
     std::cout << "\nTree loaded successfully!\n";
     std::cout << "Total number of nodes: " << tree.size() << "\n";
  
-    // Write the report file; this throws if the file cannot be created.
+    // Write the report file; this throws error if the file cannot be created
     try
     {
         writeTreeReport(tree, "about_tree.txt");
@@ -143,7 +133,7 @@ int main(int argc, char* argv[])
         return 1;
     }
  
-    // Print the general and binary tree analysis to the console.
+    // Print the general and binary tree analysis to the console
     printAnalysis(tree, std::cout);
     printBinaryTreeAnalysis(tree, std::cout);
  
@@ -155,7 +145,7 @@ int main(int argc, char* argv[])
     {
         std::cout << "\nWhich node would you like to explore (enter position or \"exit\"): ";
  
-        if (!(std::cin >> userInput))  // end of input: stop instead of looping forever
+        if (!(std::cin >> userInput)) 
         {
             break;
         }
@@ -172,7 +162,7 @@ int main(int argc, char* argv[])
             int position = std::stoi(userInput, &charactersRead);
             const TreeNode* selectedNode = tree.findNode(position);
  
-            // The whole input must be a number, and the node must exist.
+            // input has to be a number and the node should exist
             if (charactersRead != userInput.length() || selectedNode == nullptr)
             {
                 std::cout << "Invalid input. Please try again.\n";
@@ -182,7 +172,8 @@ int main(int argc, char* argv[])
                 displayNodeInformation(selectedNode);
             }
         }
-        catch (...)  // stoi throws for non-numbers and out-of-range values
+        // throws error for non-numbers and out-of-range values
+        catch (...)
         {
             std::cout << "Invalid input. Please try again.\n";
         }
